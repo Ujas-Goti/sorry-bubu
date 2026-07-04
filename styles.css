@@ -294,16 +294,37 @@ h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
   height: clamp(140px, 36vw, 200px);
 }
 
-.hug-group {
+.hug-video-wrap,
+.hug-fallback {
   position: absolute;
-  bottom: 10vh;
+  bottom: 8vh;
   left: 50%;
-  width: min(340px, 88vw);
-  height: auto;
+  width: min(360px, 90vw);
   opacity: 0;
   will-change: transform, opacity;
   pointer-events: none;
+}
+.hug-video-wrap {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--pink-50);
+  box-shadow:
+    0 16px 40px rgba(214, 51, 132, 0.22),
+    0 0 0 4px rgba(255, 255, 255, 0.85);
+}
+.hug-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 48vh;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.hug-fallback {
   filter: drop-shadow(0 14px 32px rgba(214, 51, 132, 0.22));
+}
+.hug-fallback.is-visible {
+  opacity: 1;
 }
 
 .hug-hearts {
@@ -466,6 +487,85 @@ h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
   font-size: 0.45em;
   color: var(--ink);
   opacity: 0.85;
+}
+
+/* ---------- that night conversation ---------- */
+.that-night {
+  padding-top: 12vh;
+  padding-bottom: 12vh;
+}
+.that-night-title {
+  font-size: clamp(2.6rem, 10vw, 4.2rem);
+  color: var(--pink-600);
+  margin-bottom: 2vh;
+}
+.that-night-intro {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  color: var(--ink);
+  opacity: 0.9;
+  margin-bottom: 6vh;
+  max-width: 26ch;
+}
+.convo-card {
+  width: min(560px, 92vw);
+  border-radius: 22px;
+  padding: clamp(22px, 5.5vw, 36px);
+  margin-bottom: 4vh;
+  text-align: left;
+  box-shadow: 0 14px 36px rgba(214, 51, 132, 0.12);
+  will-change: transform, opacity;
+}
+.convo-you {
+  background: linear-gradient(145deg, #fff 0%, #fff8fb 100%);
+  border: 2px solid var(--pink-200);
+  margin-right: auto;
+  margin-left: auto;
+  transform: rotate(-0.6deg);
+}
+.convo-me {
+  background: linear-gradient(145deg, #fff5f9 0%, #ffe8f0 100%);
+  border: 2px solid var(--pink-400);
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(0.6deg);
+}
+.convo-label {
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(1.5rem, 6vw, 1.9rem);
+  color: var(--pink-600);
+  margin-bottom: 1em;
+  font-weight: 700;
+}
+.convo-line {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.45rem, 5.8vw, 1.85rem);
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 0.85em;
+}
+.convo-line:last-child { margin-bottom: 0; }
+.convo-promise {
+  width: min(560px, 92vw);
+  margin-top: 4vh;
+  padding: clamp(24px, 6vw, 40px);
+  text-align: center;
+}
+.convo-promise-line {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 6.2vw, 2rem);
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 0.6em;
+  will-change: transform, opacity;
+}
+.convo-promise-line.big {
+  font-size: clamp(1.75rem, 7vw, 2.35rem);
+  color: var(--pink-600);
+  margin-top: 0.5em;
 }
 
 /* ---------- finale ---------- */

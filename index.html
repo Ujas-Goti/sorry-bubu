@@ -102,7 +102,23 @@
         <img src="assets/bears/dudu-run.png" alt="" />
       </div>
 
-      <img class="hug-group" src="assets/bears/holding-hands.png" alt="Bubu and Dudu holding hands" />
+      <div class="hug-video-wrap">
+        <video
+          class="hug-video"
+          id="hugVideo"
+          playsinline
+          muted
+          preload="auto"
+          aria-hidden="true"
+          poster="assets/bears/holding-hands.png"
+        >
+          <source src="assets/videos/hug.mov" type="video/quicktime" />
+          <source src="assets/videos/hug.webm" type="video/webm" />
+        </video>
+      </div>
+
+      <!-- fallback if video files aren't added yet -->
+      <img class="hug-fallback" src="assets/bears/holding-hands.png" alt="Bubu and Dudu holding hands" />
 
       <div class="hug-hearts" aria-hidden="true">
         <span>💗</span><span>💕</span><span>💖</span><span>💘</span><span>💝</span><span>❤️</span><span>💓</span>
@@ -157,7 +173,36 @@
     <h2 class="infinity-answer">infinitely. <span>and then a little more ∞</span></h2>
   </section>
 
-  <!-- ============ 10. FINALE ============ -->
+  <!-- ============ 10. THAT NIGHT ============ -->
+  <section class="that-night" id="that-night">
+    <h2 class="that-night-title">about that night… 🌙</h2>
+    <p class="that-night-intro">I keep thinking about what we said. this is what my heart heard.</p>
+
+    <div class="convo-card convo-you">
+      <p class="convo-label">from you, babaa gatlu 💗</p>
+      <p class="convo-line">you couldn't hold it in anymore that day. your nerves were already gone, your eyes full, and you told yourself you didn't even want to stay home.</p>
+      <p class="convo-line">you missed me from the moment you left the store — a beautiful sunset that meant nothing because I wasn't there to share it with you.</p>
+      <p class="convo-line">you kept imagining coming home… us cooking, watching something, playing together… and then remembering that's not our life right now.</p>
+      <p class="convo-line">you cried thinking how I used to be right there — at arm's length. how you can't just call me, can't meet me at the stairs, can't sit and be held the way you need.</p>
+      <p class="convo-line">everything felt so silent. like the whole world went quiet without me in it.</p>
+    </div>
+
+    <div class="convo-card convo-me">
+      <p class="convo-label">from me, your bubu 🐻</p>
+      <p class="convo-line">and I realized I spoke to you while you were crying in the worst way possible. I should've gotten up, gone outside, and talked to you properly.</p>
+      <p class="convo-line">it all happened so fast — I didn't understand in that moment. but that doesn't excuse it. I'm sorry I hurt you when you were already breaking.</p>
+      <p class="convo-line">please forgive me, ma gatlu. I'll be more careful with your heart from now on.</p>
+      <p class="convo-line">I'll try to sleep earlier so when I wake up I'm not half-asleep — so I have the strength to listen, think, and speak to you the way you deserve.</p>
+    </div>
+
+    <div class="convo-promise">
+      <p class="convo-promise-line">I heard every word you said.</p>
+      <p class="convo-promise-line">I know what you lost. I know what we're both missing.</p>
+      <p class="convo-promise-line big">I'm coming back to you, babaa gatlu — and until I do, I'm holding you through every call, every sunrise, every quiet night that feels too loud without us.</p>
+    </div>
+  </section>
+
+  <!-- ============ 11. FINALE ============ -->
   <section class="finale" id="finale">
     <img class="finale-bears-img" src="assets/bears/heart-peek.png" alt="Bubu and Dudu" />
     <h2 class="finale-title">so… am I forgiven?</h2>

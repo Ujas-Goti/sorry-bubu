@@ -140,7 +140,44 @@ gsap.from(".her-caption", {
 
 /* ---------- bears run & hug: pinned scrub scene ---------- */
 (function bearsScene() {
-  gsap.set(".hug-group", { opacity: 0, scale: 0.55, xPercent: -50 });
+  const hugVideo = document.getElementById("hugVideo");
+  const hugFallback = document.querySelector(".hug-fallback");
+  let hugDuration = 0;
+  let useVideo = false;
+
+  const markVideoReady = () => {
+    if (!hugVideo || !hugVideo.duration || Number.isNaN(hugVideo.duration)) return;
+    hugDuration = hugVideo.duration;
+    useVideo = true;
+    hugVideo.pause();
+    hugVideo.currentTime = 0;
+    if (hugFallback) hugFallback.hidden = true;
+    ScrollTrigger.refresh();
+  };
+
+  if (hugVideo) {
+    hugVideo.addEventListener("loadedmetadata", markVideoReady);
+    hugVideo.addEventListener("error", () => {
+      useVideo = false;
+      if (hugFallback) hugFallback.hidden = false;
+    });
+    // iOS sometimes needs loadeddata before duration is valid
+    hugVideo.addEventListener("loadeddata", markVideoReady);
+    hugVideo.load();
+  }
+
+  const scrubHugClip = (timelineProgress) => {
+    if (!useVideo || !hugDuration) return;
+    // hug phase: bears fade out (~52%) through hearts (~88%)
+    const hugStart = 0.52;
+    const hugEnd = 0.88;
+    const t = gsap.utils.clamp(0, 1, (timelineProgress - hugStart) / (hugEnd - hugStart));
+    if (timelineProgress >= hugStart - 0.02) {
+      hugVideo.currentTime = t * hugDuration;
+    }
+  };
+
+  gsap.set(".hug-video-wrap, .hug-fallback", { opacity: 0, scale: 0.55, xPercent: -50 });
   gsap.set(".scene-bubu", { opacity: 1, xPercent: -50, scaleX: 1 });
   gsap.set(".scene-dudu", { opacity: 1, xPercent: -50, scaleX: 1 });
 
@@ -152,21 +189,22 @@ gsap.from(".her-caption", {
       scrub: 0.8,
       pin: true,
       anticipatePin: 1,
+      onUpdate: (self) => scrubHugClip(self.progress),
     },
   });
+
+  const hugTarget = ".hug-video-wrap, .hug-fallback";
 
   // phase 1: run toward each other from far apart
   tl.fromTo(".bears-text-1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1 })
     .fromTo(".scene-bubu", { x: "calc(-50% - 52vw)" }, { x: "calc(-50% - 14vw)", duration: 3.8, ease: "none" }, 0)
     .fromTo(".scene-dudu", { x: "calc(-50% + 52vw)" }, { x: "calc(-50% + 14vw)", duration: 3.8, ease: "none" }, 0)
-    // running bounce — alternating legs
     .to(".scene-bubu", { y: -22, repeat: 9, yoyo: true, duration: 0.32, ease: "sine.inOut" }, 0)
     .to(".scene-dudu", { y: -22, repeat: 9, yoyo: true, duration: 0.32, ease: "sine.inOut" }, 0.16)
-    // slight lean-in while running
     .to(".scene-bubu", { rotation: 6, duration: 3.8, ease: "none" }, 0)
     .to(".scene-dudu", { rotation: -6, duration: 3.8, ease: "none" }, 0)
 
-    // phase 2: they meet — swap to hug image
+    // phase 2: meet → hug video scrubs as she keeps scrolling
     .to(".bears-text-1", { opacity: 0, y: -30, duration: 0.6 }, 2.6)
     .to(".scene-bubu, .scene-dudu", {
       x: "-50%",
@@ -178,13 +216,13 @@ gsap.from(".her-caption", {
       ease: "power2.in",
     }, 3.1)
     .fromTo(".bears-text-2", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.9 }, 3.3)
-    .to(".hug-group", {
+    .to(hugTarget, {
       opacity: 1,
       scale: 1,
       duration: 1,
       ease: "back.out(1.6)",
     }, 3.35)
-    .to(".hug-group", {
+    .to(hugTarget, {
       y: -8,
       repeat: 3,
       yoyo: true,
@@ -277,6 +315,38 @@ gsap.utils.toArray(".note-line, .note-signature").forEach((line) => {
     scrollTrigger: { trigger: ".infinity-answer", start: "top 88%", toggleActions: "play none none reverse" },
   });
 })();
+
+/* ---------- that night: conversation cards ---------- */
+gsap.from(".that-night-title, .that-night-intro", {
+  opacity: 0,
+  y: 40,
+  stagger: 0.15,
+  duration: 0.9,
+  ease: "power3.out",
+  scrollTrigger: { trigger: ".that-night", start: "top 78%", toggleActions: "play none none reverse" },
+});
+
+gsap.utils.toArray(".convo-card").forEach((card, i) => {
+  gsap.from(card, {
+    opacity: 0,
+    y: 60,
+    x: i === 0 ? -30 : 30,
+    rotation: i === 0 ? -3 : 3,
+    duration: 0.9,
+    ease: "back.out(1.4)",
+    scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
+  });
+});
+
+gsap.utils.toArray(".convo-promise-line").forEach((line) => {
+  gsap.from(line, {
+    opacity: 0,
+    y: 24,
+    duration: 0.7,
+    ease: "power2.out",
+    scrollTrigger: { trigger: line, start: "top 92%", toggleActions: "play none none reverse" },
+  });
+});
 
 /* ---------- finale: dodging "no" + heart burst on "yes" ---------- */
 (function finale() {
