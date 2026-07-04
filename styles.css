@@ -1,0 +1,642 @@
+:root {
+  --pink-50: #fff5f8;
+  --pink-100: #ffe3ec;
+  --pink-200: #ffc2d4;
+  --pink-400: #ff8fab;
+  --pink-500: #ff6b9d;
+  --pink-600: #d63384;
+  --pink-700: #b02a6b;
+  --cream: #fffaf3;
+  --brown: #6b4a32;
+  --ink: #45222f;
+  --paper: #fffdf7;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--pink-50) 0%, var(--pink-100) 30%, #ffeef4 60%, var(--pink-50) 100%);
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+section {
+  position: relative;
+  padding: 18vh 6vw;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+}
+
+h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
+
+.nowrap { white-space: nowrap; }
+
+/* ---------- floating hearts background ---------- */
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.hearts-bg .bg-heart {
+  position: absolute;
+  bottom: -8vh;
+  font-size: 22px;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) translateX(0) scale(0.7) rotate(-8deg); opacity: 0; }
+  10%  { opacity: 0.5; }
+  50%  { transform: translateY(-55vh) translateX(4vw) scale(1) rotate(8deg); opacity: 0.35; }
+  100% { transform: translateY(-112vh) translateX(-3vw) scale(1.2) rotate(-6deg); opacity: 0; }
+}
+
+/* ---------- hero ---------- */
+.hero { min-height: 100vh; min-height: 100svh; }
+
+.hero-bears {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-bears-frame {
+  overflow: hidden;
+  width: min(340px, 88vw);
+  border-radius: 16px;
+  max-height: clamp(230px, 52vw, 350px);
+}
+.hero-bears-img {
+  display: block;
+  width: 100%;
+  margin-bottom: -36px;
+  will-change: transform;
+  filter: drop-shadow(0 12px 28px rgba(214, 51, 132, 0.18));
+}
+
+.hero-title {
+  font-size: clamp(3rem, 12vw, 6rem);
+  color: var(--pink-600);
+  margin-top: 4vh;
+}
+.hero-sub {
+  font-size: clamp(1.15rem, 4.8vw, 1.5rem);
+  font-weight: 600;
+  color: var(--ink);
+  opacity: 0.9;
+  margin-top: 1.2vh;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: calc(max(4vh, env(safe-area-inset-bottom)) + 8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--pink-600);
+}
+.scroll-arrow {
+  font-size: 1.8rem;
+  line-height: 1;
+  animation: bob 1.5s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(9px); opacity: 0.55; }
+}
+
+/* ---------- intro ---------- */
+.intro { gap: 6vh; }
+.intro-line {
+  font-size: clamp(2.2rem, 9vw, 4rem);
+  color: var(--ink);
+  max-width: 22ch;
+}
+.split-words .word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ---------- confession ---------- */
+.confession-title {
+  font-size: clamp(2.4rem, 10vw, 4.5rem);
+  color: var(--ink);
+}
+.confession-title .alot {
+  color: var(--pink-600);
+  font-size: 1.15em;
+}
+.confession-ldr {
+  margin-top: 3vh;
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  color: var(--ink);
+  max-width: 28ch;
+  line-height: 1.35;
+}
+.annoy-cards {
+  margin-top: 6vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(480px, 92vw);
+}
+.annoy-card {
+  background: #fff;
+  border: 2px solid var(--pink-200);
+  border-radius: 20px;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: clamp(1.05rem, 4.4vw, 1.2rem);
+  box-shadow: 0 8px 24px rgba(214, 51, 132, 0.10);
+  will-change: transform, opacity;
+}
+.confession-but {
+  margin-top: 8vh;
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  color: var(--pink-600);
+}
+
+/* ---------- memories ---------- */
+.memories-title {
+  font-size: clamp(2.4rem, 9vw, 4rem);
+  color: var(--pink-600);
+  max-width: 18ch;
+  margin-bottom: 8vh;
+}
+.polaroid-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+  width: min(420px, 90vw);
+}
+.polaroid {
+  background: #fff;
+  padding: 14px 14px 18px;
+  border-radius: 6px;
+  box-shadow: 0 16px 40px rgba(90, 61, 74, 0.18);
+  will-change: transform, opacity;
+}
+.polaroid img {
+  width: 100%;
+  display: block;
+  border-radius: 3px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.polaroid figcaption {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.45rem, 6vw, 1.8rem);
+  color: var(--ink);
+  padding-top: 12px;
+}
+.tilt-left  { transform: rotate(-3deg); }
+.tilt-right { transform: rotate(3deg); }
+
+/* ---------- her face ---------- */
+.her-title {
+  font-size: clamp(2.4rem, 9vw, 4rem);
+  color: var(--ink);
+  margin-bottom: 6vh;
+}
+.her-photos {
+  display: flex;
+  gap: 4vw;
+  justify-content: center;
+}
+.her-photo {
+  width: min(200px, 42vw);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 5px solid #fff;
+  box-shadow: 0 14px 36px rgba(224, 68, 107, 0.22);
+  will-change: transform, opacity;
+}
+.her-photo-1 { transform: rotate(-5deg); }
+.her-photo-2 { transform: rotate(5deg); margin-top: 5vh; }
+.her-caption {
+  margin-top: 6vh;
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.9rem, 7.5vw, 2.8rem);
+  color: var(--pink-600);
+}
+.her-caption span {
+  font-size: 0.62em;
+  color: var(--ink);
+  opacity: 0.95;
+}
+
+/* ---------- bears meet scene ---------- */
+.bears-scene { padding: 0; min-height: 100vh; }
+.bears-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bears-text {
+  position: absolute;
+  top: 16vh;
+  width: 90vw;
+  font-size: clamp(2rem, 8.5vw, 3.6rem);
+  color: var(--ink);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.bears-text-2 { color: var(--pink-600); }
+
+/* running bears — transparent PNG sprites */
+.bear-sprite {
+  position: absolute;
+  bottom: 14vh;
+  left: 50%;
+  overflow: visible;
+  will-change: transform;
+  pointer-events: none;
+}
+.bear-sprite img {
+  display: block;
+  height: clamp(130px, 34vw, 190px);
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(69, 34, 47, 0.14));
+}
+.scene-bubu.bear-sprite img,
+.scene-dudu.bear-sprite img {
+  height: clamp(140px, 36vw, 200px);
+}
+
+.hug-video-wrap,
+.hug-fallback {
+  position: absolute;
+  bottom: 8vh;
+  left: 50%;
+  width: min(360px, 90vw);
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+.hug-video-wrap {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--pink-50);
+  box-shadow:
+    0 16px 40px rgba(214, 51, 132, 0.22),
+    0 0 0 4px rgba(255, 255, 255, 0.85);
+}
+.hug-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 48vh;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.hug-fallback {
+  filter: drop-shadow(0 14px 32px rgba(214, 51, 132, 0.22));
+}
+.hug-fallback.is-visible {
+  opacity: 1;
+}
+
+.hug-hearts {
+  position: absolute;
+  bottom: 42vh;
+  left: 50%;
+  width: 0;
+  height: 0;
+}
+.hug-hearts span {
+  position: absolute;
+  font-size: clamp(22px, 6vw, 36px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ---------- envelope scene ---------- */
+.envelope-scene { padding: 0; min-height: 100vh; }
+.envelope-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6vh;
+  overflow: hidden;
+}
+.envelope-hint {
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.6rem, 6.5vw, 2.4rem);
+  color: var(--ink);
+  padding: 0 8vw;
+  text-align: center;
+}
+.envelope {
+  position: relative;
+  width: min(340px, 82vw);
+  aspect-ratio: 10 / 7;
+  will-change: transform;
+}
+.envelope-back {
+  position: absolute; inset: 0;
+  background: var(--pink-400);
+  border-radius: 10px;
+}
+.letter {
+  position: absolute;
+  left: 5%;
+  top: 6%;
+  width: 90%;
+  height: 88%;
+  background: var(--paper);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(90, 61, 74, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+.letter-peek {
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  color: var(--pink-600);
+  padding: 0 12px;
+  text-align: center;
+}
+.envelope-front {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 42%, var(--pink-500) 42%);
+  border-radius: 10px;
+  clip-path: polygon(0 40%, 50% 74%, 100% 40%, 100% 100%, 0 100%);
+}
+.envelope-flap {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 46%;
+  background: var(--pink-600);
+  border-radius: 10px 10px 0 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  will-change: transform;
+  z-index: 3;
+}
+.envelope-seal {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(30px, 9vw, 44px);
+  z-index: 4;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  will-change: transform, opacity;
+}
+
+/* ---------- the note ---------- */
+.note { padding-top: 8vh; }
+.note-paper {
+  background: var(--paper);
+  width: min(560px, 92vw);
+  border-radius: 18px;
+  padding: clamp(28px, 7vw, 52px);
+  box-shadow: 0 24px 60px rgba(224, 68, 107, 0.16);
+  border: 2px solid var(--pink-100);
+  text-align: left;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 2.1em, rgba(255, 143, 171, 0.22) 2.1em, rgba(255, 143, 171, 0.22) calc(2.1em + 1px)
+  );
+}
+.note-title {
+  font-size: clamp(2.2rem, 9vw, 3.2rem);
+  color: var(--pink-600);
+  text-align: center;
+  margin-bottom: 1.2em;
+}
+.note-line {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 6.4vw, 2.05rem);
+  line-height: 2.1em;
+  color: var(--ink);
+  will-change: transform, opacity;
+}
+.note-line.big {
+  font-size: clamp(2rem, 8.5vw, 2.9rem);
+  color: var(--pink-600);
+  text-align: center;
+  margin: 0.4em 0;
+}
+.note-signature {
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.6rem, 6.5vw, 2.2rem);
+  color: var(--brown);
+  text-align: right;
+  margin-top: 1em;
+  will-change: transform, opacity;
+}
+
+/* ---------- infinity ---------- */
+.infinity-title {
+  font-size: clamp(2.4rem, 9.5vw, 4rem);
+  color: var(--ink);
+}
+.infinity-svg {
+  width: min(400px, 86vw);
+  margin: 4vh 0;
+}
+.infinity-path {
+  will-change: stroke-dashoffset;
+}
+.infinity-answer {
+  font-size: clamp(2.8rem, 11vw, 5rem);
+  color: var(--pink-600);
+}
+.infinity-answer span {
+  display: block;
+  font-size: 0.45em;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+/* ---------- that night conversation ---------- */
+.that-night {
+  padding-top: 12vh;
+  padding-bottom: 12vh;
+}
+.that-night-title {
+  font-size: clamp(2.6rem, 10vw, 4.2rem);
+  color: var(--pink-600);
+  margin-bottom: 2vh;
+}
+.that-night-intro {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  color: var(--ink);
+  opacity: 0.9;
+  margin-bottom: 6vh;
+  max-width: 26ch;
+}
+.convo-card {
+  width: min(560px, 92vw);
+  border-radius: 22px;
+  padding: clamp(22px, 5.5vw, 36px);
+  margin-bottom: 4vh;
+  text-align: left;
+  box-shadow: 0 14px 36px rgba(214, 51, 132, 0.12);
+  will-change: transform, opacity;
+}
+.convo-you {
+  background: linear-gradient(145deg, #fff 0%, #fff8fb 100%);
+  border: 2px solid var(--pink-200);
+  margin-right: auto;
+  margin-left: auto;
+  transform: rotate(-0.6deg);
+}
+.convo-me {
+  background: linear-gradient(145deg, #fff5f9 0%, #ffe8f0 100%);
+  border: 2px solid var(--pink-400);
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(0.6deg);
+}
+.convo-label {
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(1.5rem, 6vw, 1.9rem);
+  color: var(--pink-600);
+  margin-bottom: 1em;
+  font-weight: 700;
+}
+.convo-line {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.45rem, 5.8vw, 1.85rem);
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 0.85em;
+}
+.convo-line:last-child { margin-bottom: 0; }
+.convo-promise {
+  width: min(560px, 92vw);
+  margin-top: 4vh;
+  padding: clamp(24px, 6vw, 40px);
+  text-align: center;
+}
+.convo-promise-line {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 6.2vw, 2rem);
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 0.6em;
+  will-change: transform, opacity;
+}
+.convo-promise-line.big {
+  font-size: clamp(1.75rem, 7vw, 2.35rem);
+  color: var(--pink-600);
+  margin-top: 0.5em;
+}
+
+/* ---------- finale ---------- */
+.finale { min-height: 90vh; }
+.finale-bears-img {
+  width: min(260px, 72vw);
+  height: auto;
+  margin-bottom: 3vh;
+  filter: drop-shadow(0 10px 24px rgba(214, 51, 132, 0.18));
+}
+.finale-title {
+  font-size: clamp(2.6rem, 10vw, 4.5rem);
+  color: var(--ink);
+  margin-bottom: 5vh;
+}
+.finale-buttons {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 64px;
+  width: 100%;
+}
+.btn-yes, .btn-no {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.05rem, 4.6vw, 1.25rem);
+  padding: 18px 32px;
+  min-height: 56px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-yes {
+  background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(214, 51, 132, 0.4);
+}
+.btn-yes:active { transform: scale(0.95); }
+.btn-no {
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid var(--pink-200);
+  position: relative;
+  will-change: transform;
+}
+.finale-note {
+  margin-top: 5vh;
+  font-family: "Caveat", cursive;
+  font-size: clamp(2rem, 8.5vw, 3.2rem);
+  color: var(--pink-600);
+}
+
+/* confetti hearts on yes */
+.burst-heart {
+  position: fixed;
+  font-size: 26px;
+  pointer-events: none;
+  z-index: 50;
+  will-change: transform, opacity;
+}
+
+/* finale bottom safe area so buttons never hide behind the iPhone home bar */
+.finale { padding-bottom: calc(18vh + env(safe-area-inset-bottom)); }
+
+/* reduce motion: keep it gentle */
+@media (prefers-reduced-motion: reduce) {
+  .hearts-bg { display: none; }
+  .scroll-arrow { animation: none; }
+}
