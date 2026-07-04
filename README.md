@@ -2,7 +2,11 @@
 
 A one-page, bubu & dudu themed apology + love letter website with heavy scroll-driven animations, built for mobile.
 
-## Run it
+## Live site
+
+**https://ujas-goti.github.io/sorry-bubu/**
+
+## Run it locally
 
 It's a static site — no build step. Either:
 
