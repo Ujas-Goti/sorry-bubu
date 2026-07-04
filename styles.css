@@ -74,18 +74,20 @@ h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
 .hero-bears {
   display: flex;
   align-items: center;
-  gap: 4vw;
+  justify-content: center;
 }
-.bear { width: clamp(110px, 28vw, 180px); height: auto; will-change: transform; }
-.hero-heart {
-  font-size: clamp(28px, 8vw, 48px);
-  animation: heartbeat 1.4s ease-in-out infinite;
+.hero-bears-frame {
+  overflow: hidden;
+  width: min(340px, 88vw);
+  border-radius: 16px;
+  max-height: clamp(230px, 52vw, 350px);
 }
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  25% { transform: scale(1.25); }
-  40% { transform: scale(1); }
-  60% { transform: scale(1.18); }
+.hero-bears-img {
+  display: block;
+  width: 100%;
+  margin-bottom: -36px;
+  will-change: transform;
+  filter: drop-shadow(0 12px 28px rgba(214, 51, 132, 0.18));
 }
 
 .hero-title {
@@ -141,7 +143,16 @@ h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
 }
 .confession-title .alot {
   color: var(--pink-600);
-  font-size: 1.25em;
+  font-size: 1.15em;
+}
+.confession-ldr {
+  margin-top: 3vh;
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  color: var(--ink);
+  max-width: 28ch;
+  line-height: 1.35;
 }
 .annoy-cards {
   margin-top: 6vh;
@@ -260,15 +271,41 @@ h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
   will-change: transform, opacity;
 }
 .bears-text-2 { color: var(--pink-600); }
-.scene-bear {
+
+/* running bears — transparent PNG sprites */
+.bear-sprite {
   position: absolute;
-  bottom: 18vh;
-  width: clamp(130px, 34vw, 210px);
-  height: auto;
+  bottom: 14vh;
+  left: 50%;
+  overflow: visible;
   will-change: transform;
+  pointer-events: none;
 }
-.scene-dudu { left: 6vw; }
-.scene-bubu { right: 6vw; }
+.bear-sprite img {
+  display: block;
+  height: clamp(130px, 34vw, 190px);
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(69, 34, 47, 0.14));
+}
+.scene-bubu.bear-sprite img,
+.scene-dudu.bear-sprite img {
+  height: clamp(140px, 36vw, 200px);
+}
+
+.hug-group {
+  position: absolute;
+  bottom: 10vh;
+  left: 50%;
+  width: min(340px, 88vw);
+  height: auto;
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+  filter: drop-shadow(0 14px 32px rgba(214, 51, 132, 0.22));
+}
+
 .hug-hearts {
   position: absolute;
   bottom: 42vh;
@@ -433,9 +470,11 @@ h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
 
 /* ---------- finale ---------- */
 .finale { min-height: 90vh; }
-.finale-bears {
-  font-size: clamp(3rem, 14vw, 5rem);
+.finale-bears-img {
+  width: min(260px, 72vw);
+  height: auto;
   margin-bottom: 3vh;
+  filter: drop-shadow(0 10px 24px rgba(214, 51, 132, 0.18));
 }
 .finale-title {
   font-size: clamp(2.6rem, 10vw, 4.5rem);
@@ -499,5 +538,5 @@ h1, h2 { font-family: "Dancing Script", "Caveat", cursive; line-height: 1.2; }
 /* reduce motion: keep it gentle */
 @media (prefers-reduced-motion: reduce) {
   .hearts-bg { display: none; }
-  .scroll-arrow, .hero-heart { animation: none; }
+  .scroll-arrow { animation: none; }
 }

@@ -27,9 +27,8 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
   }
 })();
 
-/* ---------- hero: bears bob + gentle exit on scroll ---------- */
-gsap.to(".hero .bubu", { y: -12, rotation: -4, duration: 1.6, yoyo: true, repeat: -1, ease: "sine.inOut" });
-gsap.to(".hero .dudu", { y: -12, rotation: 4, duration: 1.6, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 0.8 });
+/* ---------- hero: gentle bob + exit on scroll ---------- */
+gsap.to(".hero-bears-img", { y: -10, duration: 1.8, yoyo: true, repeat: -1, ease: "sine.inOut" });
 
 gsap.to(".hero-title, .hero-sub, .hero-bears", {
   opacity: 0,
@@ -69,6 +68,14 @@ gsap.from(".confession-title", {
   duration: 0.8,
   ease: "back.out(1.8)",
   scrollTrigger: { trigger: ".confession-title", start: "top 82%", toggleActions: "play none none reverse" },
+});
+
+gsap.from(".confession-ldr", {
+  opacity: 0,
+  y: 30,
+  duration: 0.8,
+  ease: "power2.out",
+  scrollTrigger: { trigger: ".confession-ldr", start: "top 85%", toggleActions: "play none none reverse" },
 });
 
 gsap.utils.toArray(".annoy-card").forEach((card, i) => {
@@ -131,37 +138,72 @@ gsap.from(".her-caption", {
   scrollTrigger: { trigger: ".her-caption", start: "top 90%", toggleActions: "play none none reverse" },
 });
 
-/* ---------- bears meet: pinned scrub scene ---------- */
+/* ---------- bears run & hug: pinned scrub scene ---------- */
 (function bearsScene() {
+  gsap.set(".hug-group", { opacity: 0, scale: 0.55, xPercent: -50 });
+  gsap.set(".scene-bubu", { opacity: 1, xPercent: -50, scaleX: 1 });
+  gsap.set(".scene-dudu", { opacity: 1, xPercent: -50, scaleX: 1 });
+
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".bears-scene",
       start: "top top",
-      end: "+=220%",
+      end: "+=280%",
       scrub: 0.8,
       pin: true,
       anticipatePin: 1,
     },
   });
 
+  // phase 1: run toward each other from far apart
   tl.fromTo(".bears-text-1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1 })
-    .fromTo(".scene-dudu", { x: "-42vw" }, { x: "27vw", duration: 4, ease: "none" }, 0)
-    .to(".scene-dudu", { y: -14, yoyo: true, repeat: 7, duration: 0.5, ease: "sine.inOut" }, 0)
-    .fromTo(".scene-bubu", { x: "42vw" }, { x: "-27vw", duration: 4, ease: "none" }, 0)
-    .to(".scene-bubu", { y: -14, yoyo: true, repeat: 7, duration: 0.5, ease: "sine.inOut" }, 0.25)
-    .to(".bears-text-1", { opacity: 0, y: -30, duration: 0.8 }, 2.4)
-    .fromTo(".bears-text-2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1 }, 3.1)
+    .fromTo(".scene-bubu", { x: "calc(-50% - 52vw)" }, { x: "calc(-50% - 14vw)", duration: 3.8, ease: "none" }, 0)
+    .fromTo(".scene-dudu", { x: "calc(-50% + 52vw)" }, { x: "calc(-50% + 14vw)", duration: 3.8, ease: "none" }, 0)
+    // running bounce — alternating legs
+    .to(".scene-bubu", { y: -22, repeat: 9, yoyo: true, duration: 0.32, ease: "sine.inOut" }, 0)
+    .to(".scene-dudu", { y: -22, repeat: 9, yoyo: true, duration: 0.32, ease: "sine.inOut" }, 0.16)
+    // slight lean-in while running
+    .to(".scene-bubu", { rotation: 6, duration: 3.8, ease: "none" }, 0)
+    .to(".scene-dudu", { rotation: -6, duration: 3.8, ease: "none" }, 0)
+
+    // phase 2: they meet — swap to hug image
+    .to(".bears-text-1", { opacity: 0, y: -30, duration: 0.6 }, 2.6)
+    .to(".scene-bubu, .scene-dudu", {
+      x: "-50%",
+      y: 0,
+      rotation: 0,
+      scale: 0.85,
+      opacity: 0,
+      duration: 0.7,
+      ease: "power2.in",
+    }, 3.1)
+    .fromTo(".bears-text-2", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.9 }, 3.3)
+    .to(".hug-group", {
+      opacity: 1,
+      scale: 1,
+      duration: 1,
+      ease: "back.out(1.6)",
+    }, 3.35)
+    .to(".hug-group", {
+      y: -8,
+      repeat: 3,
+      yoyo: true,
+      duration: 0.45,
+      ease: "sine.inOut",
+    }, 3.6)
+
+    // hearts burst on hug
     .to(".hug-hearts span", {
       opacity: 1,
-      scale: 1.4,
-      x: (i) => (i - 3) * 42,
-      y: (i) => -60 - Math.abs(i - 3) * 26 - Math.random() * 30,
-      rotation: () => gsap.utils.random(-30, 30),
-      stagger: 0.12,
-      duration: 1.2,
+      scale: 1.5,
+      x: (i) => (i - 3) * 44,
+      y: (i) => -70 - Math.abs(i - 3) * 28 - Math.random() * 24,
+      rotation: () => gsap.utils.random(-35, 35),
+      stagger: 0.1,
+      duration: 1.1,
       ease: "back.out(2)",
-    }, 3.6)
-    .to(".hug-hearts span", { opacity: 0, y: "-=50", duration: 0.8 }, 5);
+    }, 3.7)
+    .to(".hug-hearts span", { opacity: 0, y: "-=40", duration: 0.7 }, 5.2);
 })();
 
 /* ---------- envelope: pinned scrub open ---------- */
