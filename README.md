@@ -6,6 +6,13 @@ A one-page, bubu & dudu themed apology + love letter website with heavy scroll-d
 
 **https://ujas-goti.github.io/sorry-bubu/**
 
+### Deploy (GitHub Pages)
+
+1. Repo **Settings** → **Pages**
+2. **Source:** Deploy from a branch
+3. **Branch:** `main` → **`/ (root)`**
+4. Save — site updates automatically on every push to `main`
+
 ## Run it locally
 
 It's a static site — no build step. Either:
